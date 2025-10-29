@@ -1,103 +1,101 @@
-import Image from "next/image";
+'use client';
+
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+
+const featuredCars = [
+  { id: 1, make: 'Tesla', model: 'Model S', year: 2024, price: 79990, image: '/Img/T S.avif' },
+  { id: 10, make: 'Porsche', model: 'Cayenne', year: 2023, price: 79200, image: '/Img/PC.avif' },
+  { id: 3, make: 'Audi', model: 'A6', year: 2023, price: 56900, image: '/Img/A E.avif' },
+];
+
+const testimonials = [
+  { id: 1, name: 'John Doe', testimonial: 'The best car buying experience I have ever had. The staff was friendly and knowledgeable.', image: '/Img/55.jpg' },
+  { id: 2, name: 'Jane Smith', testimonial: 'I found the perfect car for my family at a great price. I would highly recommend Elite Wheels to anyone.', image: '/Img/123.jpg' },
+  { id: 3, name: 'Peter Jones', testimonial: 'The customer service was exceptional. They went above and beyond to make sure I was satisfied with my purchase.', image: '/Img/HP.webp' },
+];
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div>
+      <div className="relative h-screen">
+        <video
+          autoPlay
+          loop
+          muted
+          className="absolute top-0 left-0 w-full h-full object-cover"
+        >
+          <source src="/Img/BV 1.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-text-primary bg-black bg-opacity-50">
+          <motion.h1
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-5xl font-bold mb-4"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Find Your Perfect Ride
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-lg mb-8 max-w-2xl text-center"
           >
-            Read our docs
-          </a>
+            Welcome to Elite Wheels, your one-stop destination for the best new and used cars! We offer a wide range of top-quality vehicles to suit every budget and lifestyle. Whether you're looking for a sleek sedan, a powerful SUV, or a fuel-efficient hatchback, we have the perfect car for you. Explore our latest arrivals and find the car of your dreams today.
+          </motion.p>
+          <Link href="/inventory" className="bg-accent hover:bg-red-700 text-white font-bold py-2 px-4 rounded animate-bounce">
+            View Inventory
+          </Link>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+
+      <div className="bg-secondary py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-8 text-text-primary">Featured Cars</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {featuredCars.map(car => (
+              <motion.div
+                key={car.id}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="bg-primary rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300"
+              >
+                <Image src={car.image} alt={`${car.make} ${car.model}`} width={500} height={300} className="object-cover" />
+                <div className="p-6">
+                  <h3 className="text-2xl font-bold mb-2 text-text-primary">{car.make} {car.model}</h3>
+                  <p className="text-text-secondary mb-2">{car.year}</p>
+                  <p className="text-2xl font-bold text-accent">${car.price.toLocaleString()}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-primary py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-8 text-text-primary">What Our Customers Say</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map(testimonial => (
+              <motion.div
+                key={testimonial.id}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="bg-secondary rounded-lg shadow-lg p-8"
+              >
+                <Image src={testimonial.image} alt={testimonial.name} width={80} height={80} className="rounded-full mx-auto mb-4" />
+                <p className="text-text-secondary text-center mb-4">"{testimonial.testimonial}"</p>
+                <p className="text-text-primary text-center font-bold">- {testimonial.name}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
