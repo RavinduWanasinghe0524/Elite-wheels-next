@@ -51,7 +51,12 @@
   }
 
   .btn-gold {
-    @apply px-8 py-3 bg-gradient-to-r from-[#D4AF37] to-[#AA8C2C] text-black font-bold rounded-full hover:shadow-[0_0_20px_rgba(212, 175, 55, 0.5)] transition-all duration-300 transform hover:scale-105;
+    @apply px-8 py-3 bg-gradient-to-r from-[#D4AF37] to-[#AA8C2C] text-black font-bold rounded-full transition-all duration-300 transform hover:scale-105;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .btn-gold:hover {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
   }
 
   .btn-glass {
