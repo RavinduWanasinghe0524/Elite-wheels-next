@@ -2,34 +2,32 @@
 > elite-wheels-next@0.1.0 build
 > next build
 
- ΓÜá Warning: Next.js inferred your workspace root, but it may not be correct.
- We detected multiple lockfiles and selected the directory of C:\Users\ASUS\package-lock.json as the root directory.
- To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
-   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
- Detected additional lockfiles: 
-   * C:\Users\ASUS\Desktop\projects\elite-wheels-next\package-lock.json
-
-   Γû▓ Next.js 16.0.4 (Turbopack)
+  Γû▓ Next.js 14.2.15
 
    Creating an optimized production build ...
+ Γ£ô Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/9) ...
+   Generating static pages (2/9) 
+   Generating static pages (4/9) 
+   Generating static pages (6/9) 
+ Γ£ô Generating static pages (9/9)
+   Finalizing page optimization ...
+   Collecting build traces ...
 
-> Build error occurred
-Error: Turbopack build failed with 1 errors:
-./Desktop/projects/elite-wheels-next/app/layout.tsx:4:1
-Module not found: Can't resolve '@/styles/globals.css'
-  2 | import { Inter, Outfit } from 'next/font/google';
-  3 | import Navbar from '@/components/Navbar';
-> 4 | import '@/styles/globals.css';
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  5 |
-  6 | const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-  7 | const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
-
-Import map: aliased to relative './styles/globals.css' inside of [project]/Desktop/projects/elite-wheels-next
+Route (app)                              Size     First Load JS
+Γöî Γùï /                                    50.8 kB         396 kB
+Γö£ Γùï /_not-found                          873 B          88.1 kB
+Γö£ Γùï /about                               3.66 kB         342 kB
+Γö£ Γùï /contact                             5.66 kB         339 kB
+Γö£ Γùï /inventory                           6.07 kB         344 kB
+Γöö Γùï /login                               2.14 kB         342 kB
++ First Load JS shared by all            87.2 kB
+  Γö£ chunks/117-d3633258aa6886fa.js       31.6 kB
+  Γö£ chunks/fd9d1056-978fb3ad0384f526.js  53.6 kB
+  Γöö other shared chunks (total)          1.95 kB
 
 
-https://nextjs.org/docs/messages/module-not-found
+Γùï  (Static)  prerendered as static content
 
-
-    at <unknown> (./Desktop/projects/elite-wheels-next/app/layout.tsx:4:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
