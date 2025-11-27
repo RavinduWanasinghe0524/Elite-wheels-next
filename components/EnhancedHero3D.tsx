@@ -165,6 +165,7 @@ export default function EnhancedHero3D() {
             maxDepthThreshold={1.4}
             color="#050505"
             metalness={0.5}
+            mirror={0}
           />
         </mesh>
       </Canvas>
