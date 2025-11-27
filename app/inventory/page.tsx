@@ -38,19 +38,19 @@ export default function Inventory() {
   }, [searchTerm, selectedMake, selectedPrice, selectedYear]);
 
   return (
-    <div className="min-h-screen pt-20 pb-12 px-4 relative">
+    <div className="min-h-screen pt-24 pb-12 px-6 relative">
       <ParticleBackground />
       
-      <div className="container mx-auto">
+      <div className="container mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Our <span className="text-gold">Inventory</span>
+          <h1 className="text-5xl md:text-6xl font-display font-bold mb-4">
+            Our <span className="text-gradient-gold">Inventory</span>
           </h1>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
             Explore our curated collection of premium vehicles. Use the filters below to find your perfect match.
           </p>
         </motion.div>
@@ -60,21 +60,21 @@ export default function Inventory() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="glass p-6 rounded-2xl mb-12"
+          className="glass p-8 rounded-2xl mb-12 shadow-2xl"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <input
               type="text"
-              placeholder="Search by make or model..."
+              placeholder="Search make or model..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors"
+              className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors"
             />
             
             <select
               value={selectedMake}
               onChange={(e) => setSelectedMake(e.target.value)}
-              className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors"
+              className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors"
             >
               <option value="all">All Makes</option>
               {makes.filter(m => m !== 'all').map(make => (
@@ -85,21 +85,21 @@ export default function Inventory() {
             <select
               value={selectedPrice}
               onChange={(e) => setSelectedPrice(e.target.value)}
-              className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors"
+              className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors"
             >
-              <option value="all">All Prices</option>
-              <option value="30000">$30,000 and below</option>
-              <option value="50000">$50,000 and below</option>
-              <option value="80000">$80,000 and below</option>
-              <option value="100000">$100,000 and below</option>
+              <option value="all">Max Price</option>
+              <option value="30000">$30,000</option>
+              <option value="50000">$50,000</option>
+              <option value="80000">$80,000</option>
+              <option value="100000">$100,000</option>
             </select>
 
             <select
               value={selectedYear}
               onChange={(e) => setSelectedYear(e.target.value)}
-              className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors"
+              className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors"
             >
-              <option value="all">All Years</option>
+              <option value="all">Year</option>
               {years.filter(y => y !== 'all').map(year => (
                 <option key={year} value={year}>{year}</option>
               ))}
@@ -108,7 +108,7 @@ export default function Inventory() {
         </motion.div>
 
         {/* Car Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           <AnimatePresence mode="popLayout">
             {filteredCars.map((car) => (
               <CarCard3D 
@@ -134,34 +134,35 @@ export default function Inventory() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md"
             onClick={() => setSelectedCar(null)}
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-secondary rounded-2xl overflow-hidden max-w-4xl w-full border border-white/10 shadow-2xl"
+              className="glass-card rounded-3xl overflow-hidden max-w-5xl w-full border border-gold/20 shadow-2xl shadow-gold/10"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="grid md:grid-cols-2">
-                <div className="relative h-64 md:h-full min-h-[300px]">
+                <div className="relative h-72 md:h-full min-h-[400px]">
                   <Image
                     src={selectedCar.image}
                     alt={`${selectedCar.make} ${selectedCar.model}`}
                     fill
                     className="object-cover"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                 </div>
-                <div className="p-8">
+                <div className="p-10 flex flex-col justify-center">
                   <div className="flex justify-between items-start mb-6">
                     <div>
-                      <h2 className="text-3xl font-bold mb-2">{selectedCar.make} {selectedCar.model}</h2>
-                      <p className="text-gold text-xl font-medium">${selectedCar.price.toLocaleString()}</p>
+                      <h2 className="text-4xl font-display font-bold mb-2 text-white">{selectedCar.make} {selectedCar.model}</h2>
+                      <p className="text-gold text-2xl font-bold">${selectedCar.price.toLocaleString()}</p>
                     </div>
                     <button
                       onClick={() => setSelectedCar(null)}
-                      className="text-gray-400 hover:text-white transition-colors"
+                      className="text-gray-400 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full"
                     >
                       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -169,23 +170,23 @@ export default function Inventory() {
                     </button>
                   </div>
 
-                  <div className="space-y-4 mb-8">
-                    <div className="flex justify-between border-b border-white/10 pb-2">
+                  <div className="space-y-6 mb-8">
+                    <div className="flex justify-between border-b border-white/10 pb-3">
                       <span className="text-gray-400">Year</span>
-                      <span className="font-medium">{selectedCar.year}</span>
+                      <span className="font-bold text-white">{selectedCar.year}</span>
                     </div>
-                    <div className="flex justify-between border-b border-white/10 pb-2">
+                    <div className="flex justify-between border-b border-white/10 pb-3">
                       <span className="text-gray-400">Category</span>
-                      <span className="font-medium">{selectedCar.category}</span>
+                      <span className="font-bold text-white">{selectedCar.category}</span>
                     </div>
-                    <div className="pt-4">
-                      <h4 className="text-sm font-bold text-gray-400 mb-2 uppercase tracking-wider">Description</h4>
+                    <div className="pt-2">
+                      <h4 className="text-sm font-bold text-gold mb-2 uppercase tracking-wider">Description</h4>
                       <p className="text-gray-300 leading-relaxed">{selectedCar.description}</p>
                     </div>
                   </div>
 
                   <button
-                    className="w-full py-4 bg-gold text-primary font-bold rounded-xl hover:bg-white transition-colors duration-300"
+                    className="w-full py-4 btn-gold text-lg shadow-lg shadow-gold/20"
                     onClick={() => alert('Contact feature coming soon!')}
                   >
                     Inquire Now
