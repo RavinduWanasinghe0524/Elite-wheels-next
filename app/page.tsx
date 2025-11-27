@@ -37,13 +37,13 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link 
                 href="/inventory"
-                className="px-8 py-4 bg-gold text-primary font-bold rounded-full hover:bg-white transition-all duration-300 transform hover:scale-105 shadow-[0_0_20px_rgba(255,215,0,0.3)]"
+                className="btn-primary"
               >
                 Explore Inventory
               </Link>
               <Link 
                 href="/contact"
-                className="px-8 py-4 border border-white/20 bg-white/5 backdrop-blur-sm text-white font-bold rounded-full hover:bg-white/10 transition-all duration-300"
+                className="btn-secondary"
               >
                 Contact Us
               </Link>

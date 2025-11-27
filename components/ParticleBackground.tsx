@@ -4,7 +4,7 @@ import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-function Particles({ count = 100 }) {
+function Particles({ count = 150 }) {
   const mesh = useRef<THREE.InstancedMesh>(null);
   const light = useRef<THREE.PointLight>(null);
 
@@ -50,10 +50,10 @@ function Particles({ count = 100 }) {
 
   return (
     <>
-      <pointLight ref={light} distance={40} intensity={8} color="lightblue" />
+      <pointLight ref={light} distance={40} intensity={8} color="#ffd700" />
       <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
         <dodecahedronGeometry args={[0.2, 0]} />
-        <meshPhongMaterial color="#050505" />
+        <meshPhongMaterial color="#ffd700" emissive="#ffd700" emissiveIntensity={0.5} />
       </instancedMesh>
     </>
   );
@@ -61,10 +61,11 @@ function Particles({ count = 100 }) {
 
 export default function ParticleBackground() {
   return (
-    <div className="fixed inset-0 -z-10 opacity-30">
+    <div className="fixed inset-0 -z-10 opacity-20">
       <Canvas camera={{ position: [0, 0, 70], fov: 75 }}>
         <fog attach="fog" args={['#1a1a2e', 60, 100]} />
-        <Particles count={200} />
+        <ambientLight intensity={0.3} />
+        <Particles count={150} />
       </Canvas>
     </div>
   );

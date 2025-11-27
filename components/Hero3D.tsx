@@ -20,51 +20,75 @@ function CarModel() {
         {/* Abstract Car Body */}
         <mesh position={[0, 0.5, 0]} castShadow receiveShadow>
           <boxGeometry args={[2, 0.8, 4.5]} />
-          <meshStandardMaterial color="#1a1a2e" metalness={0.8} roughness={0.2} />
+          <meshStandardMaterial color="#1a1a2e" metalness={0.9} roughness={0.1} />
         </mesh>
         
         {/* Cabin */}
         <mesh position={[0, 1.2, -0.5]} castShadow>
           <boxGeometry args={[1.8, 0.7, 2.5]} />
-          <meshStandardMaterial color="#16213e" metalness={0.9} roughness={0.1} opacity={0.7} transparent />
+          <meshStandardMaterial color="#16213e" metalness={0.95} roughness={0.05} opacity={0.8} transparent />
+        </mesh>
+
+        {/* Gold Accent Stripe */}
+        <mesh position={[0, 0.8, 0]}>
+          <boxGeometry args={[2.1, 0.05, 4.6]} />
+          <meshStandardMaterial color="#ffd700" emissive="#ffd700" emissiveIntensity={0.5} metalness={1} roughness={0} />
         </mesh>
 
         {/* Wheels */}
         <mesh position={[1.1, 0, 1.5]} rotation={[0, 0, Math.PI / 2]} castShadow>
           <cylinderGeometry args={[0.4, 0.4, 0.3, 32]} />
-          <meshStandardMaterial color="#333" />
+          <meshStandardMaterial color="#1a1a1a" metalness={0.8} roughness={0.2} />
         </mesh>
         <mesh position={[-1.1, 0, 1.5]} rotation={[0, 0, Math.PI / 2]} castShadow>
           <cylinderGeometry args={[0.4, 0.4, 0.3, 32]} />
-          <meshStandardMaterial color="#333" />
+          <meshStandardMaterial color="#1a1a1a" metalness={0.8} roughness={0.2} />
         </mesh>
         <mesh position={[1.1, 0, -1.5]} rotation={[0, 0, Math.PI / 2]} castShadow>
           <cylinderGeometry args={[0.4, 0.4, 0.3, 32]} />
-          <meshStandardMaterial color="#333" />
+          <meshStandardMaterial color="#1a1a1a" metalness={0.8} roughness={0.2} />
         </mesh>
         <mesh position={[-1.1, 0, -1.5]} rotation={[0, 0, Math.PI / 2]} castShadow>
           <cylinderGeometry args={[0.4, 0.4, 0.3, 32]} />
-          <meshStandardMaterial color="#333" />
+          <meshStandardMaterial color="#1a1a1a" metalness={0.8} roughness={0.2} />
+        </mesh>
+
+        {/* Gold Wheel Rims */}
+        <mesh position={[1.1, 0, 1.5]} rotation={[0, 0, Math.PI / 2]}>
+          <cylinderGeometry args={[0.2, 0.2, 0.35, 32]} />
+          <meshStandardMaterial color="#ffd700" metalness={1} roughness={0} />
+        </mesh>
+        <mesh position={[-1.1, 0, 1.5]} rotation={[0, 0, Math.PI / 2]}>
+          <cylinderGeometry args={[0.2, 0.2, 0.35, 32]} />
+          <meshStandardMaterial color="#ffd700" metalness={1} roughness={0} />
+        </mesh>
+        <mesh position={[1.1, 0, -1.5]} rotation={[0, 0, Math.PI / 2]}>
+          <cylinderGeometry args={[0.2, 0.2, 0.35, 32]} />
+          <meshStandardMaterial color="#ffd700" metalness={1} roughness={0} />
+        </mesh>
+        <mesh position={[-1.1, 0, -1.5]} rotation={[0, 0, Math.PI / 2]}>
+          <cylinderGeometry args={[0.2, 0.2, 0.35, 32]} />
+          <meshStandardMaterial color="#ffd700" metalness={1} roughness={0} />
         </mesh>
 
         {/* Headlights */}
         <mesh position={[0.6, 0.5, 2.26]}>
           <boxGeometry args={[0.5, 0.2, 0.1]} />
-          <meshStandardMaterial color="#fff" emissive="#fff" emissiveIntensity={2} />
+          <meshStandardMaterial color="#fff" emissive="#fff" emissiveIntensity={3} />
         </mesh>
         <mesh position={[-0.6, 0.5, 2.26]}>
           <boxGeometry args={[0.5, 0.2, 0.1]} />
-          <meshStandardMaterial color="#fff" emissive="#fff" emissiveIntensity={2} />
+          <meshStandardMaterial color="#fff" emissive="#fff" emissiveIntensity={3} />
         </mesh>
 
         {/* Taillights */}
         <mesh position={[0.6, 0.6, -2.26]}>
           <boxGeometry args={[0.5, 0.2, 0.1]} />
-          <meshStandardMaterial color="#ff0000" emissive="#ff0000" emissiveIntensity={2} />
+          <meshStandardMaterial color="#e94560" emissive="#e94560" emissiveIntensity={2.5} />
         </mesh>
         <mesh position={[-0.6, 0.6, -2.26]}>
           <boxGeometry args={[0.5, 0.2, 0.1]} />
-          <meshStandardMaterial color="#ff0000" emissive="#ff0000" emissiveIntensity={2} />
+          <meshStandardMaterial color="#e94560" emissive="#e94560" emissiveIntensity={2.5} />
         </mesh>
       </Float>
 
@@ -75,14 +99,14 @@ function CarModel() {
           blur={[300, 100]}
           resolution={1024}
           mixBlur={1}
-          mixStrength={40}
+          mixStrength={50}
           roughness={1}
           depthScale={1.2}
           minDepthThreshold={0.4}
           maxDepthThreshold={1.4}
-          color="#101010"
-          metalness={0.5}
-          mirror={1} // Fixed: mirror prop is number (0-1) not boolean
+          color="#050505"
+          metalness={0.6}
+          mirror={1}
         />
       </mesh>
     </group>
@@ -102,9 +126,10 @@ export default function Hero3D() {
           minPolarAngle={Math.PI / 3}
         />
         
-        <ambientLight intensity={0.5} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} />
+        <ambientLight intensity={0.6} />
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1.5} castShadow color="#ffffff" />
+        <spotLight position={[-10, 5, -10]} angle={0.2} penumbra={1} intensity={0.8} color="#ffd700" />
+        <pointLight position={[0, 5, 0]} intensity={0.5} color="#ffd700" />
         
         <Environment preset="city" />
         <CarModel />
