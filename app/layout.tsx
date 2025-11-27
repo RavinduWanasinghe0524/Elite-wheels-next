@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Outfit } from 'next/font/google';
-import Navbar from '@/components/Navbar';
+import EnhancedNavbar from '@/components/Navbar';
+import Preloader from '@/components/Preloader';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -19,7 +20,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
       <body className="bg-primary text-white antialiased">
-        <Navbar />
+        <Preloader />
+        <EnhancedNavbar />
         <main className="min-h-screen pt-16">
           {children}
         </main>

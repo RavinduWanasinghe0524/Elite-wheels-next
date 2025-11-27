@@ -2,14 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+export default function EnhancedNavbar() {
   const [scrolled, setScrolled] = useState(false);
-  const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,104 +17,111 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'Inventory', href: '/inventory' },
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
-    { name: 'Log In', href: '/login' },
+    { href: '/', label: 'Home' },
+    { href: '/inventory', label: 'Inventory' },
+    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact' },
   ];
 
   return (
-    <header
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6 }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'glass-card py-2 shadow-lg shadow-gold/10' : 'bg-transparent py-4'
+        scrolled ? 'glass py-4' : 'bg-transparent py-6'
       }`}
     >
-      <div className="container mx-auto px-4 flex justify-between items-center">
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative w-10 h-10 overflow-hidden rounded-full border-2 border-gold group-hover:scale-110 transition-transform duration-300">
-            <Image
-              src="/images/logo.png"
-              alt="Elite Wheels Logo"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 group-hover:from-gold group-hover:to-yellow-500 transition-all duration-300">
-            Elite Wheels
-          </span>
-        </Link>
+      <div className="container mx-auto px-6">
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <Link href="/" className="group">
+            <div className="flex items-center gap-2">
+              <span className="text-3xl font-display font-bold text-gradient-gold">
+                Elite<span className="text-white">Wheels</span>
+              </span>
+            </div>
+          </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className={`relative text-sm font-medium tracking-wide transition-colors duration-300 hover:text-gold ${
-                pathname === link.href ? 'text-gold' : 'text-gray-300'
-              }`}
-            >
-              {link.name}
-              {pathname === link.href && (
-                <motion.div
-                  layoutId="underline"
-                  className="absolute -bottom-1 left-0 w-full h-0.5 bg-gold"
-                />
-              )}
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="relative group py-2"
+              >
+                <span className="text-sm font-medium text-gray-300 group-hover:text-gold transition-colors duration-300">
+                  {link.label}
+                </span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"></span>
+              </Link>
+            ))}
+          </nav>
+
+          {/* Actions */}
+          <div className="hidden md:flex items-center gap-6">
+            <Link href="/login" className="text-sm font-medium text-white hover:text-gold transition-colors">
+              Sign In
             </Link>
-          ))}
-        </nav>
-
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden text-white focus:outline-none"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <div className="w-6 h-6 flex flex-col justify-center gap-1.5">
-            <motion.span
-              animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-              className="w-full h-0.5 bg-white block"
-            />
-            <motion.span
-              animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-              className="w-full h-0.5 bg-white block"
-            />
-            <motion.span
-              animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-              className="w-full h-0.5 bg-white block"
-            />
+            <Link href="/inventory">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="btn-gold text-sm px-6 py-2.5 shadow-lg shadow-gold/20"
+              >
+                Explore Cars
+              </motion.button>
+            </Link>
           </div>
-        </button>
 
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, x: '100%' }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: '100%' }}
-              transition={{ type: 'tween', duration: 0.3 }}
-              className="fixed inset-0 bg-primary/95 backdrop-blur-xl z-40 md:hidden flex flex-col items-center justify-center gap-8"
-            >
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-white p-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <div className="w-6 h-5 flex flex-col justify-between">
+              <span className={`w-full h-0.5 bg-gold transition-all duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+              <span className={`w-full h-0.5 bg-gold transition-all duration-300 ${mobileMenuOpen ? 'opacity-0' : ''}`} />
+              <span className={`w-full h-0.5 bg-gold transition-all duration-300 ${mobileMenuOpen ? '-rotate-45 -translate-y-2.5' : ''}`} />
+            </div>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: '100vh' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden fixed inset-0 bg-black/95 backdrop-blur-xl pt-24 px-6"
+          >
+            <div className="flex flex-col gap-8 items-center">
               {navLinks.map((link) => (
                 <Link
-                  key={link.name}
+                  key={link.href}
                   href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className={`text-2xl font-bold transition-colors duration-300 ${
-                    pathname === link.href ? 'text-gold' : 'text-white hover:text-gold'
-                  }`}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-2xl font-display font-bold text-white hover:text-gold transition-colors"
                 >
-                  {link.name}
+                  {link.label}
                 </Link>
               ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </header>
+              <div className="w-16 h-1 bg-gold rounded-full my-4" />
+              <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="text-xl text-gray-300 hover:text-white">
+                Sign In
+              </Link>
+              <Link href="/inventory" onClick={() => setMobileMenuOpen(false)}>
+                <button className="btn-gold w-full px-12 py-4 text-lg">
+                  Explore Cars
+                </button>
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
-};
-
-export default Navbar;
+}
