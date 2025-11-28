@@ -53,7 +53,7 @@ export default function Contact() {
             
             <div className="absolute bottom-10 left-10 z-20">
               <h3 className="text-3xl font-display font-bold text-white mb-2">Global <span className="text-gold">Reach</span></h3>
-              <p className="text-gray-300 max-w-xs">Connecting luxury enthusiasts worldwide. Visit our headquarters or reach out digitally.</p>
+              <p className="text-gray-300 max-w-xs">Connecting luxury enthusiasts worldwide with premium automotive excellence.</p>
             </div>
           </motion.div>
 
