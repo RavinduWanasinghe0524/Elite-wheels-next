@@ -209,5 +209,155 @@ export const cars: Car[] = [
         image: '/images/T S.avif',
         description: 'The Tesla Model S is a luxury electric sedan with a high range and rapid acceleration, offering one of the best driving experiences for electric vehicles.',
         category: 'Electric'
+    },
+    {
+        id: 21,
+        make: 'Toyota',
+        model: 'Prius',
+        year: 2024,
+        price: 28999,
+        image: 'https://images.unsplash.com/photo-1617469767053-d3b523a0b982?w=800&h=600&fit=crop',
+        description: 'The Toyota Prius is a pioneering hybrid vehicle known for exceptional fuel economy, making it perfect for Sri Lankan roads and traffic conditions.',
+        category: 'Hybrid'
+    },
+    {
+        id: 22,
+        make: 'Toyota',
+        model: 'Land Cruiser',
+        year: 2023,
+        price: 89999,
+        image: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=800&h=600&fit=crop',
+        description: 'The legendary Toyota Land Cruiser offers unmatched durability and off-road capability, ideal for Sri Lankan terrain and long-lasting performance.',
+        category: 'SUV'
+    },
+    {
+        id: 23,
+        make: 'Suzuki',
+        model: 'Alto',
+        year: 2023,
+        price: 12999,
+        image: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&h=600&fit=crop',
+        description: 'The Suzuki Alto is a compact and fuel-efficient city car, perfect for navigating urban Sri Lankan traffic with minimal running costs.',
+        category: 'Hatchback'
+    },
+    {
+        id: 24,
+        make: 'Suzuki',
+        model: 'Swift',
+        year: 2024,
+        price: 18999,
+        image: 'https://images.unsplash.com/photo-1621135802920-133df287f89c?w=800&h=600&fit=crop',
+        description: 'The Suzuki Swift combines sporty styling with excellent fuel efficiency and reliability, making it a popular choice in Sri Lanka.',
+        category: 'Hatchback'
+    },
+    {
+        id: 25,
+        make: 'Mitsubishi',
+        model: 'Outlander',
+        year: 2023,
+        price: 36999,
+        image: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&h=600&fit=crop',
+        description: 'The Mitsubishi Outlander is a versatile SUV with plug-in hybrid option, offering practicality and efficiency for Sri Lankan families.',
+        category: 'SUV'
+    },
+    {
+        id: 26,
+        make: 'Honda',
+        model: 'Civic',
+        year: 2023,
+        price: 29999,
+        image: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&h=600&fit=crop',
+        description: 'The Honda Civic is a reliable sedan with refined performance and low maintenance costs, highly popular in the Sri Lankan market.',
+        category: 'Sedan'
+    },
+    {
+        id: 27,
+        make: 'Toyota',
+        model: 'Aqua',
+        year: 2024,
+        price: 24999,
+        image: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800&h=600&fit=crop',
+        description: 'The Toyota Aqua (Prius C) is a compact hybrid perfect for Sri Lankan roads, offering exceptional fuel economy and reliability.',
+        category: 'Hybrid'
+    },
+    {
+        id: 28,
+        make: 'Nissan',
+        model: 'Leaf',
+        year: 2023,
+        price: 32999,
+        image: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&h=600&fit=crop',
+        description: 'The Nissan Leaf is a fully electric vehicle with zero emissions, ideal for eco-conscious Sri Lankan drivers and city commuting.',
+        category: 'Electric'
+    },
+    {
+        id: 29,
+        make: 'Honda',
+        model: 'Vezel',
+        year: 2023,
+        price: 31999,
+        image: 'https://images.unsplash.com/photo-1581540222194-0def2dda95b8?w=800&h=600&fit=crop',
+        description: 'The Honda Vezel (HR-V) is a stylish compact SUV with hybrid options, combining practicality with fuel efficiency for Sri Lankan roads.',
+        category: 'SUV'
+    },
+    {
+        id: 30,
+        make: 'Suzuki',
+        model: 'Wagon R',
+        year: 2024,
+        price: 15999,
+        image: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&h=600&fit=crop',
+        description: 'The Suzuki Wagon R is a practical tall-wagon with excellent fuel economy and spacious interior, perfect for Sri Lankan families.',
+        category: 'Hatchback'
+    },
+    {
+        id: 31,
+        make: 'Toyota',
+        model: 'Vitz',
+        year: 2023,
+        price: 17999,
+        image: 'https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=800&h=600&fit=crop',
+        description: 'The Toyota Vitz (Yaris) is a reliable compact hatchback known for durability and low running costs, extremely popular in Sri Lanka.',
+        category: 'Hatchback'
+    },
+    {
+        id: 32,
+        make: 'Mitsubishi',
+        model: 'Montero Sport',
+        year: 2023,
+        price: 54999,
+        image: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800&h=600&fit=crop',
+        description: 'The Mitsubishi Montero Sport is a rugged SUV with excellent off-road capability and spacious 7-seater configuration.',
+        category: 'SUV'
+    },
+    {
+        id: 33,
+        make: 'Toyota',
+        model: 'Camry Hybrid',
+        year: 2024,
+        price: 42999,
+        image: 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800&h=600&fit=crop',
+        description: 'The Toyota Camry Hybrid offers luxury sedan comfort with hybrid efficiency, perfect for executive transport in Sri Lanka.',
+        category: 'Hybrid'
+    },
+    {
+        id: 34,
+        make: 'Honda',
+        model: 'Fit',
+        year: 2023,
+        price: 19999,
+        image: 'https://images.unsplash.com/photo-1590362891991-f776e747a588?w=800&h=600&fit=crop',
+        description: 'The Honda Fit (Jazz) is a versatile hatchback with flexible interior space and excellent fuel economy, ideal for Sri Lankan city driving.',
+        category: 'Hatchback'
+    },
+    {
+        id: 35,
+        make: 'Nissan',
+        model: 'X-Trail',
+        year: 2024,
+        price: 44999,
+        image: 'https://images.unsplash.com/photo-1622116423558-646c36c576a1?w=800&h=600&fit=crop',
+        description: 'The Nissan X-Trail is a comfortable 7-seater SUV with advanced safety features and hybrid options for Sri Lankan families.',
+        category: 'SUV'
     }
 ];
