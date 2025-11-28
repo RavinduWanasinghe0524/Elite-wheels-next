@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Outfit } from 'next/font/google';
 import EnhancedNavbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import Preloader from '@/components/Preloader';
 import './globals.css';
 
@@ -25,6 +26,7 @@ export default function RootLayout({
         <main className="min-h-screen pt-16">
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   );
