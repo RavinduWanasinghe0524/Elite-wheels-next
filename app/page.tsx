@@ -7,6 +7,7 @@ import ParticleBackground from '@/components/ParticleBackground';
 import SearchBar from '@/components/SearchBar';
 import EnhancedCarCard from '@/components/EnhancedCarCard';
 import WhyChooseUs from '@/components/WhyChooseUs';
+import Testimonials from '@/components/Testimonials';
 import { cars } from '@/lib/carData';
 
 export default function Home() {
@@ -134,8 +135,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
+      {/* Why Choose Us */}
       <WhyChooseUs />
+
+      {/* Customer Testimonials */}
+      <Testimonials />
 
       {/* CTA Section */}
       <section className="py-24 relative overflow-hidden">
