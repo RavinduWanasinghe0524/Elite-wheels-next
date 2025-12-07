@@ -4,7 +4,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment, Float } from '@react-three/drei';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import PremiumCar from './PremiumCar';
+import RealisticCarModel from './RealisticCarModel';
 
 interface CustomizationOptions {
   bodyColor: string;
@@ -69,7 +69,11 @@ export default function CarCustomizer3D({ basePrice = 50000 }: { basePrice?: num
               <pointLight position={[-10, 5, -10]} intensity={1.5} color="#D4AF37" />
               <Environment preset="sunset" />
               
-              <PremiumCar color={customization.bodyColor} autoRotate={true} />
+              <RealisticCarModel 
+                color={customization.bodyColor} 
+                rimColor={customization.rimColor}
+                autoRotate={true} 
+              />
               
               <OrbitControls 
                 enableZoom={true}

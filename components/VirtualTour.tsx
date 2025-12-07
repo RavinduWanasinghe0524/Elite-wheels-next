@@ -4,7 +4,7 @@ import { Canvas } from '@react-three/fiber';
 import { Environment, OrbitControls, PerspectiveCamera, Float } from '@react-three/drei';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import PremiumCar from './PremiumCar';
+import RealisticCarModel from './RealisticCarModel';
 
 interface VehicleLocation {
   id: number;
@@ -12,15 +12,17 @@ interface VehicleLocation {
   position: [number, number, number];
   description: string;
   price: number;
+  color: string;
+  rimColor: string;
 }
 
 const vehicles: VehicleLocation[] = [
-  { id: 1, name: 'Mercedes E-Class', position: [-6, 0, 2], description: 'Luxury Sedan', price: 53999 },
-  { id: 2, name: 'BMW i4', position: [0, 0, 2], description: 'Electric Performance', price: 75999 },
-  { id: 3, name: 'Audi e-tron', position: [6, 0, 2], description: 'Electric SUV', price: 65999 },
-  { id: 4, name: 'Porsche Cayenne', position: [-6, 0, -4], description: 'Luxury SUV', price: 89999 },
-  { id: 5, name: 'Tesla Model S', position: [0, 0, -4], description: 'Electric Sedan', price: 94999 },
-  { id: 6, name: 'Toyota Land Cruiser', position: [6, 0, -4], description: 'Premium SUV', price: 89999 },
+  { id: 1, name: 'Mercedes E-Class', position: [-6, 0, 2], description: 'Luxury Sedan', price: 53999, color: '#0a0a0a', rimColor: '#C0C0C0' },
+  { id: 2, name: 'BMW i4', position: [0, 0, 2], description: 'Electric Performance', price: 75999, color: '#1E3A8A', rimColor: '#FFD700' },
+  { id: 3, name: 'Audi e-tron', position: [6, 0, 2], description: 'Electric SUV', price: 65999, color: '#DC2626', rimColor: '#1a1a1a' },
+  { id: 4, name: 'Porsche Cayenne', position: [-6, 0, -4], description: 'Luxury SUV', price: 89999, color: '#D4AF37', rimColor: '#FFD700' },
+  { id: 5, name: 'Tesla Model S', position: [0, 0, -4], description: 'Electric Sedan', price: 94999, color: '#F8F8FF', rimColor: '#0a0a0a' },
+  { id: 6, name: 'Toyota Land Cruiser', position: [6, 0, -4], description: 'Premium SUV', price: 89999, color: '#065F46', rimColor: '#C0C0C0' },
 ];
 
 function Showroom() {
@@ -50,7 +52,11 @@ function Showroom() {
       {vehicles.map((vehicle, index) => (
         <group key={vehicle.id} position={vehicle.position}>
           <Float speed={1 + index * 0.2} rotationIntensity={0.1} floatIntensity={0.2}>
-            <PremiumCar color={index % 2 === 0 ? '#D4AF37' : '#C0C0C0'} />
+            <RealisticCarModel 
+              color={vehicle.color} 
+              rimColor={vehicle.rimColor}
+              scale={0.9}
+            />
           </Float>
           
           {/* Spotlight for each car */}
