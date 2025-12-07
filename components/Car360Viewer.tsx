@@ -4,22 +4,15 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, OrbitControls } from '@react-three/drei';
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import PremiumCar from './PremiumCar';
-import * as THREE from 'three';
+import RealisticCarModel from './RealisticCarModel';
 
 function RotatingCar({ autoRotate, view }: { autoRotate: boolean; view: 'exterior' | 'interior' }) {
-  const groupRef = useRef<THREE.Group>(null);
-  
-  useFrame(() => {
-    if (groupRef.current && autoRotate) {
-      groupRef.current.rotation.y += 0.005;
-    }
-  });
-
   return (
-    <group ref={groupRef}>
-      <PremiumCar color="#D4AF37" />
-    </group>
+    <RealisticCarModel 
+      color="#D4AF37" 
+      rimColor="#FFD700"
+      autoRotate={autoRotate}
+    />
   );
 }
 

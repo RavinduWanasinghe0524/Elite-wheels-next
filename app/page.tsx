@@ -2,20 +2,38 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useState } from 'react';
 import EnhancedHero3D from '@/components/EnhancedHero3D';
 import ParticleBackground from '@/components/ParticleBackground';
 import SearchBar from '@/components/SearchBar';
-import EnhancedCarCard from '@/components/EnhancedCarCard';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import Testimonials from '@/components/Testimonials';
+import Simple3DCar from '@/components/Simple3DCar';
 import { cars } from '@/lib/carData';
 
+// Car brands with their details
+const carBrands = [
+  { name: 'Mercedes', makes: ['Mercedes'], color: '#00adef' },
+  { name: 'BMW', makes: ['BMW'], color: '#1c69d4' },
+  { name: 'Audi', makes: ['Audi'], color: '#bb0a30' },
+  { name: 'Honda', makes: ['Honda'], color: '#e40521' },
+  { name: 'Toyota', makes: ['Toyota'], color: '#eb0a1e' },
+  { name: 'Ford', makes: ['Ford'], color: '#003478' },
+  { name: 'Nissan', makes: ['Nissan'], color: '#c3002f' },
+  { name: 'Jeep', makes: ['Jeep'], color: '#1a4d2e' },
+];
+
 export default function Home() {
+  const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
+
   const handleSearch = (filters: any) => {
     console.log('Search filters:', filters);
-    // Navigate to inventory with filters
     window.location.href = `/inventory?location=${filters.location}&carType=${filters.carType}`;
   };
+
+  const filteredCars = selectedBrand
+    ? cars.filter((car) => car.make === selectedBrand)
+    : cars.slice(0, 6);
 
   return (
     <main className="min-h-screen overflow-hidden selection:bg-gold selection:text-black">
@@ -93,6 +111,58 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* Car Brands Section */}
+      <section className="py-16 relative">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+              Explore by <span className="text-gold">Brand</span>
+            </h2>
+            <p className="text-gray-300">Click a brand to see their vehicles</p>
+          </motion.div>
+
+          {/* Brand Badges */}
+          <div className="flex flex-wrap justify-center gap-4 mb-16">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setSelectedBrand(null)}
+              className={`px-6 py-3 rounded-xl font-semibold transition-all ${
+                selectedBrand === null
+                  ? 'bg-gold text-black'
+                  : 'glass border border-white/20 hover:border-gold/50'
+              }`}
+            >
+              All Brands
+            </motion.button>
+            
+            {carBrands.map((brand) => (
+              <motion.button
+                key={brand.name}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setSelectedBrand(brand.name)}
+                className={`px-6 py-3 rounded-xl font-semibold transition-all ${
+                  selectedBrand === brand.name
+                    ? 'bg-gold text-black'
+                    : 'glass border border-white/20 hover:border-gold/50'
+                }`}
+                style={{
+                  borderColor: selectedBrand === brand.name ? brand.color : undefined
+                }}
+              >
+                {brand.name}
+              </motion.button>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Featured Collection */}
       <section className="py-24 relative">
         <div className="container mx-auto px-6">
@@ -104,17 +174,66 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Featured <span className="text-gold">Collection</span>
+              {selectedBrand ? `${selectedBrand} ` : 'Featured '}
+              <span className="text-gold">Collection</span>
             </h2>
             <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-6">
-              Explore our handpicked selection of premium vehicles
+              {selectedBrand 
+                ? `Premium ${selectedBrand} vehicles with 3D visualization`
+                : 'Explore our handpicked selection of premium vehicles'
+              }
             </p>
             <div className="w-24 h-1 bg-gold mx-auto rounded-full" />
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {cars.slice(0, 6).map((car, index) => (
-              <EnhancedCarCard key={car.id} car={car} index={index} />
+            {filteredCars.map((car, index) => (
+              <motion.div
+                key={car.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="glass-card rounded-2xl overflow-hidden border border-gold/20 hover:border-gold/50 transition-all group"
+              >
+                {/* 3D Car View */}
+                <div className="relative">
+                  <Simple3DCar carMake={car.make} />
+                  <div className="absolute top-4 right-4 glass px-3 py-1 rounded-full border border-gold/30">
+                    <span className="text-gold font-bold text-sm">{car.make}</span>
+                  </div>
+                </div>
+
+                {/* Car Details */}
+                <div className="p-6">
+                  <h3 className="text-2xl font-display font-bold mb-2">
+                    {car.make} {car.model}
+                  </h3>
+                  <div className="flex items-center gap-4 mb-4 text-sm text-gray-400">
+                    <span>{car.year}</span>
+                    <span>•</span>
+                    <span>{car.category}</span>
+                  </div>
+                  
+                  <p className="text-gray-300 mb-6 line-clamp-2">{car.description}</p>
+                  
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-400">Starting at</p>
+                      <p className="text-2xl font-bold text-gold">${car.price.toLocaleString()}</p>
+                    </div>
+                    <Link href={`/inventory/${car.id}`}>
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="btn-gold px-6 py-3"
+                      >
+                        View Details
+                      </motion.button>
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </div>
           
