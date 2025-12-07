@@ -19,6 +19,7 @@ export default function EnhancedNavbar() {
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/inventory', label: 'Inventory' },
+    { href: '/showcase', label: 'Features' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
   ];
