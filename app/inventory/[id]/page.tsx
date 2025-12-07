@@ -131,7 +131,7 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
                 {car.description}
               </p>
               <p className="text-gray-300 leading-relaxed">
-                Thisexceptional {car.year} {car.make} {car.model} represents the perfect blend of 
+                This exceptional {car.year} {car.make} {car.model} represents the perfect blend of 
                 luxury, performance, and reliability. Meticulously maintained and ready for its next owner, 
                 this vehicle offers an unparalleled driving experience with cutting-edge technology and 
                 premium features throughout.
