@@ -24,9 +24,9 @@ export default function CarComparison({ availableCars }: CarComparisonProps) {
   };
 
   const comparisonCategories = [
-    { key: 'price', label: 'Price', format: (val: number) => `$${val.toLocaleString()}`, winner: 'lowest' },
-    { key: 'year', label: 'Year', format: (val: number) => val.toString(), winner: 'highest' },
-    { key: 'category', label: 'Category', format: (val: string) => val, winner: null },
+    { key: 'price', label: 'Price', format: (val: number | string) => typeof val === 'number' ? `$${val.toLocaleString()}` : val, winner: 'lowest' },
+    { key: 'year', label: 'Year', format: (val: number | string) => val.toString(), winner: 'highest' },
+    { key: 'category', label: 'Category', format: (val: number | string) => val.toString(), winner: null },
   ];
 
   const determineWinner = (category: typeof comparisonCategories[0]) => {
@@ -174,7 +174,7 @@ export default function CarComparison({ availableCars }: CarComparisonProps) {
                       return (
                         <td key={car.id} className={`p-3 text-center ${isWinner ? 'bg-gold/10' : ''}`}>
                           <div className={`font-medium ${isWinner ? 'text-gold' : 'text-white'}`}>
-                            {category.format(value as any)}
+                            {category.format(value as number | string)}
                             {isWinner && <span className="ml-2">👑</span>}
                           </div>
                         </td>
