@@ -3,8 +3,7 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cars, Car } from '@/lib/carData';
-import CarCard3D from '@/components/CarCard3D';
-import ParticleBackground from '@/components/ParticleBackground';
+import LuxuryCarCard from '@/components/LuxuryCarCard';
 import Image from 'next/image';
 
 type ViewMode = 'grid' | 'list';
@@ -85,9 +84,7 @@ export default function Inventory() {
   const compareItems = compareList.map(id => cars.find(car => car.id === id)!);
 
   return (
-    <div className="min-h-screen pt-24 pb-12 px-6 relative">
-      <ParticleBackground />
-      
+    <div className="min-h-screen pt-24 pb-12 px-6 relative bg-charcoal">
       <div className="container mx-auto relative z-10">
         {/* Header */}
         <motion.div
@@ -263,40 +260,17 @@ export default function Inventory() {
           <AnimatePresence mode="popLayout">
             {filteredCars.map((car, index) => (
               viewMode === 'grid' ? (
-                <motion.div
+                <LuxuryCarCard
                   key={car.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9, y: -20 }}
-                  transition={{ delay: index * 0.05, duration: 0.3 }}
-                  className="relative group"
-                >
-                  <CarCard3D car={car} onViewDetails={setSelectedCar} />
-                  <div className="absolute top-4 right-4 flex flex-col gap-2 z-10">
-                    <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => toggleFavorite(car.id)}
-                      className={`p-2 rounded-full glass border ${favorites.includes(car.id) ? 'border-gold bg-gold/20' : 'border-white/10'}`}
-                    >
-                      <svg className={`w-5 h-5 ${favorites.includes(car.id) ? 'fill-gold stroke-gold' : 'stroke-white fill-none'}`} viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                      </svg>
-                    </motion.button>
-                    <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => toggleCompare(car.id)}
-                      className={`p-2 rounded-full glass border ${compareList.includes(car.id) ? 'border-gold bg-gold/20' : 'border-white/10'} ${compareList.length >= 3 && !compareList.includes(car.id) ? 'opacity-50 cursor-not-allowed' : ''}`}
-                      disabled={compareList.length >= 3 && !compareList.includes(car.id)}
-                    >
-                      <svg className={`w-5 h-5 ${compareList.includes(car.id) ? 'stroke-gold' : 'stroke-white'}`} fill="none" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                      </svg>
-                    </motion.button>
-                  </div>
-                </motion.div>
+                  id={String(car.id)}
+                  make={car.make}
+                  model={car.model}
+                  year={car.year}
+                  price={car.price}
+                  image={car.image}
+                  category={car.category}
+                  index={index}
+                />
               ) : (
                 <motion.div
                   key={car.id}
