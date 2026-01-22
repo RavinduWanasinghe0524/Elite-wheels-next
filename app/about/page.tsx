@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import ParticleBackground from '@/components/ParticleBackground';
 import TimelineItem from '@/components/TimelineItem';
 
 export default function About() {
