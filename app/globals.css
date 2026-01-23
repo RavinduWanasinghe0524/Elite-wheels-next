@@ -10,24 +10,24 @@
   --warm-white: #FAFAF8;
   --light-text: #1a1a1a;
   --light-text-muted: #6b6b6b;
-  
+
   /* Dark Mode Colors */
   --charcoal: #0a0a0a;
   --charcoal-light: #1a1a1a;
   --charcoal-medium: #2a2a2a;
   --dark-text: #F5F3EF;
   --dark-text-muted: #a0a0a0;
-  
+
   /* Accent Colors */
   --glow-blue: #4A9FF5;
   --glow-blue-soft: rgba(74, 159, 245, 0.3);
   --glow-blue-lighter: rgba(74, 159, 245, 0.1);
-  
+
   /* Gold (Brand Color) */
   --gold: #D4AF37;
   --gold-light: #E5C158;
   --gold-dark: #B8941F;
-  
+
   /* Gradients */
   --gradient-gold: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
   --gradient-blue-glow: radial-gradient(circle at center, var(--glow-blue-soft), transparent);
@@ -40,7 +40,7 @@
 }
 
 html {
-  scroll-behavior: auto; /* Lenis will handle smooth scrolling */
+  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -51,9 +51,12 @@ body {
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   overflow-x: hidden;
   position: relative;
-  
+
   /* Signature blue glow border */
   box-shadow: inset 0 0 0 2px var(--glow-blue-soft);
+
+  /* Smooth transitions for all interactions */
+  transition: background-color 0.3s ease;
 }
 
 /* Light mode body background */
@@ -62,7 +65,12 @@ body.light-mode {
   color: var(--light-text);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Outfit', sans-serif;
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -115,30 +123,31 @@ h3 {
 }
 
 @layer components {
+
   /* Glass effect */
   .glass {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
-  
+
   .glass-card {
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
+
   /* Light mode glass */
   .light-mode .glass {
     background: rgba(0, 0, 0, 0.03);
   }
-  
+
   .light-mode .glass-card {
     background: rgba(255, 255, 255, 0.6);
     border: 1px solid rgba(0, 0, 0, 0.1);
   }
-  
+
   /* Gold gradient text */
   .text-gradient-gold {
     background: var(--gradient-gold);
@@ -146,7 +155,7 @@ h3 {
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  
+
   /* Buttons */
   .btn-gold {
     background: var(--gradient-gold);
@@ -158,12 +167,12 @@ h3 {
     border: none;
     cursor: pointer;
   }
-  
+
   .btn-gold:hover {
     transform: scale(1.05);
     box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
   }
-  
+
   .btn-glass {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
@@ -175,12 +184,12 @@ h3 {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
   }
-  
+
   .btn-glass:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: var(--gold);
   }
-  
+
   /* Section containers */
   .section-container {
     min-height: 100vh;
@@ -190,7 +199,7 @@ h3 {
     padding: 2rem;
     position: relative;
   }
-  
+
   /* Split screen layout */
   .split-screen {
     display: grid;
@@ -199,43 +208,43 @@ h3 {
     align-items: center;
     min-height: 100vh;
   }
-  
+
   @media (max-width: 768px) {
     .split-screen {
       grid-template-columns: 1fr;
       gap: 2rem;
     }
   }
-  
+
   /* Luxury car image container */
   .luxury-image {
     position: relative;
     overflow: hidden;
     border-radius: 1rem;
   }
-  
+
   .luxury-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   .luxury-image:hover img {
     transform: scale(1.05);
   }
-  
+
   /* Text reveal animation classes */
   .text-reveal {
     overflow: hidden;
   }
-  
+
   .text-reveal-inner {
     display: inline-block;
     transform: translateY(100%);
     opacity: 0;
   }
-  
+
   /* Scroll indicator */
   .scroll-indicator {
     position: absolute;
@@ -251,25 +260,28 @@ h3 {
     text-transform: uppercase;
     letter-spacing: 0.2em;
   }
-  
+
   .scroll-line {
     width: 1px;
     height: 3rem;
     background: linear-gradient(to bottom, var(--gold), transparent);
     animation: scrollPulse 2s ease-in-out infinite;
   }
-  
+
   @keyframes scrollPulse {
-    0%, 100% {
+
+    0%,
+    100% {
       opacity: 0.3;
       transform: scaleY(1);
     }
+
     50% {
       opacity: 1;
       transform: scaleY(1.2);
     }
   }
-  
+
   /* Persistent CTA */
   .persistent-cta {
     position: fixed;
@@ -279,18 +291,19 @@ h3 {
     z-index: 1000;
     animation: fadeInUp 0.6s ease-out;
   }
-  
+
   @keyframes fadeInUp {
     from {
       opacity: 0;
       transform: translate(-50%, 20px);
     }
+
     to {
       opacity: 1;
       transform: translate(-50%, 0);
     }
   }
-  
+
   /* Large background text */
   .large-bg-text {
     font-size: clamp(8rem, 20vw, 20rem);
@@ -303,21 +316,21 @@ h3 {
     line-height: 0.9;
     letter-spacing: -0.05em;
   }
-  
+
   .light-mode .large-bg-text {
     color: rgba(0, 0, 0, 0.03);
   }
-  
+
   /* Accordion styles */
   .accordion-item {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
   }
-  
+
   .accordion-item:hover {
     border-color: var(--glow-blue);
   }
-  
+
   .accordion-header {
     padding: 1.5rem 0;
     cursor: pointer;
@@ -327,26 +340,26 @@ h3 {
     font-size: 1.5rem;
     font-weight: 600;
   }
-  
+
   .accordion-content {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 0 0 0 1rem;
   }
-  
+
   .accordion-content.open {
     max-height: 500px;
     padding: 0 0 1.5rem 1rem;
   }
-  
+
   /* Image parallax container */
   .parallax-container {
     position: relative;
     height: 100vh;
     overflow: hidden;
   }
-  
+
   .parallax-image {
     position: absolute;
     top: -10%;
@@ -355,21 +368,92 @@ h3 {
     height: 120%;
     object-fit: cover;
   }
+
+  /* Magnetic Button - outline variant */
+  .btn-outline {
+    background: transparent;
+    color: var(--dark-text);
+    font-weight: 600;
+    border-radius: 9999px;
+    padding: 0.75rem 2rem;
+    border: 2px solid var(--glow-blue);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+  }
+
+  .btn-outline:hover {
+    background: var(--glow-blue-lighter);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .magnetic-button {
+    display: inline-block;
+    text-decoration: none;
+    position: relative;
+    will-change: transform;
+  }
+
+  /* Mask Reveal Utilities */
+  .mask-reveal-container {
+    clip-path: inset(0);
+  }
+
+  /* Blueprint overlay */
+  .blueprint-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    mix-blend-mode: multiply;
+    transition: opacity 0.6s ease;
+  }
+
+  /* Split text classes */
+  .split-line {
+    overflow: hidden;
+    display: block;
+  }
+
+  .split-word {
+    display: inline-block;
+    will-change: transform, opacity;
+  }
+
+  .split-char {
+    display: inline-block;
+    will-change: transform, opacity;
+  }
+
+  /* Stagger text animation helper */
+  .stagger-text {
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  /* Cinematic section utilities */
+  .cinematic-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .animation-delay-200 {
     animation-delay: 200ms;
   }
-  
+
   .animation-delay-400 {
     animation-delay: 400ms;
   }
-  
+
   .animation-delay-600 {
     animation-delay: 600ms;
   }

@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Image from 'next/image';
+import MaskRevealImage from './MaskRevealImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -127,16 +127,16 @@ export default function FleetShowcase() {
                 </motion.button>
               </div>
 
-              {/* Car Image */}
+              {/* Car Image with Mask Reveal */}
               <div className={`relative h-[500px] ${index % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}`}>
-                <div className="luxury-image h-full rounded-3xl overflow-hidden">
-                  <Image
-                    src={car.image}
-                    alt={`${car.make} ${car.model}`}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
+                <MaskRevealImage
+                  src={car.image}
+                  alt={`${car.make} ${car.model}`}
+                  className="h-full rounded-3xl"
+                  parallaxSpeed={1.5}
+                  revealDirection={index % 2 === 0 ? 'up' : 'down'}
+                  priority={index === 0}
+                />
                 
                 {/* Glow effect */}
                 <div className="absolute -inset-4 bg-gradient-radial from-gold/20 via-transparent to-transparent blur-3xl -z-10" />

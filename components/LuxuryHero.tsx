@@ -1,16 +1,27 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import gsap from 'gsap';
 import Image from 'next/image';
 
 export default function LuxuryHero() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"]
+  });
+  
+  // Parallax effects
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   useEffect(() => {
-    // Text reveal animation on load
+    // GSAP text reveal animation
     if (titleRef.current) {
       const words = titleRef.current.querySelectorAll('.word');
       gsap.fromTo(
@@ -43,21 +54,28 @@ export default function LuxuryHero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen w-full flex items-center overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-charcoal via-charcoal-light to-charcoal" />
+    <section ref={sectionRef} className="relative min-h-screen w-full flex items-center overflow-hidden">
+      {/* Background with parallax */}
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-br from-charcoal via-charcoal-light to-charcoal"
+        style={{ y: imageY }}
+      />
       
-      {/* Blue glow accents */}
-      <div className="absolute top-20 right-20 w-96 h-96 bg-glow-blue rounded-full blur-3xl opacity-20" />
-      <div className="absolute bottom-20 left-20 w-96 h-96 bg-gold rounded-full blur-3xl opacity-10" />
+      {/* Blue glow accents with parallax */}
+      <motion.div 
+        className="absolute top-20 right-20 w-96 h-96 bg-glow-blue rounded-full blur-3xl opacity-20"
+        style={{ y: imageY }}
+      />
+      <motion.div 
+        className="absolute bottom-20 left-20 w-96 h-96 bg-gold rounded-full blur-3xl opacity-10"
+        style={{ y: imageY }}
+      />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="split-screen">
-          {/* Left: Text Content */}
+          {/* Left: Text Content with parallax */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+            style={{ y: textY, opacity }}
             className="flex flex-col justify-center space-y-8"
           >
             {/* Small badge */}
@@ -105,12 +123,22 @@ export default function LuxuryHero() {
               transition={{ delay: 1.5, duration: 0.6 }}
               className="flex flex-wrap gap-4 pt-4"
             >
-              <button className="btn-gold px-10 py-4 text-lg shadow-lg shadow-gold/20">
+              <motion.a
+                href="/inventory"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-gold px-10 py-4 text-lg shadow-lg shadow-gold/20"
+              >
                 View Collection
-              </button>
-              <button className="btn-glass px-10 py-4 text-lg border-glow-blue/30">
+              </motion.a>
+              <motion.a
+                href="/book-test-drive"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-glass px-10 py-4 text-lg border-glow-blue/30"
+              >
                 Book Test Drive
-              </button>
+              </motion.a>
             </motion.div>
 
             {/* Stats */}
@@ -135,17 +163,18 @@ export default function LuxuryHero() {
             </motion.div>
           </motion.div>
 
-          {/* Right: Car Image */}
+          {/* Right: Car Image with parallax */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
+            style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "20%"]) }}
             className="relative h-[600px] lg:h-[700px]"
           >
             {/* Glow effect behind car */}
             <div className="absolute inset-0 bg-gradient-radial from-gold/20 via-transparent to-transparent blur-3xl" />
             
-            {/* Car image */}
+            {/* Car image with parallax */}
             <div className="luxury-image h-full relative">
               <Image
                 src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=2070"
@@ -172,11 +201,17 @@ export default function LuxuryHero() {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="scroll-indicator">
+      {/* Scroll Indicator with animation */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2.5, duration: 1 }}
+        style={{ opacity: useTransform(scrollYProgress, [0, 0.3], [1, 0]) }}
+        className="scroll-indicator"
+      >
         <span>Scroll</span>
         <div className="scroll-line" />
-      </div>
+      </motion.div>
     </section>
   );
 }

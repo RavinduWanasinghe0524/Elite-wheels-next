@@ -59,9 +59,7 @@ export default function About() {
   ];
 
   return (
-    <div className="min-h-screen pt-24 pb-12 relative overflow-hidden">
-      <ParticleBackground />
-      
+    <div className="min-h-screen pt-24 pb-12 relative overflow-hidden bg-charcoal">
       <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
         <motion.div

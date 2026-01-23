@@ -2,8 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import ParticleBackground from '@/components/ParticleBackground';
-import ContactGlobe3D from '@/components/ContactGlobe3D';
+import Image from 'next/image';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -25,9 +24,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-12 relative overflow-hidden">
-      <ParticleBackground />
-      
+    <div className="min-h-screen pt-24 pb-12 relative overflow-hidden bg-charcoal">
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -41,15 +38,19 @@ export default function Contact() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-7xl mx-auto items-center">
-          {/* 3D Globe Section */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             className="h-[500px] lg:h-[600px] relative rounded-3xl overflow-hidden glass-card border border-gold/10 order-2 lg:order-1"
           >
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50 z-10 pointer-events-none" />
-            <ContactGlobe3D />
+            <Image
+              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070"
+              alt="Luxury automotive excellence"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 z-10" />
             
             <div className="absolute bottom-10 left-10 z-20">
               <h3 className="text-3xl font-display font-bold text-white mb-2">Global <span className="text-gold">Reach</span></h3>
