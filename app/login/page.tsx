@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import ParticleBackground from '@/components/ParticleBackground';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -21,9 +20,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      <ParticleBackground />
-      
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-charcoal">
       <div className="container mx-auto px-6 relative z-10 flex justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

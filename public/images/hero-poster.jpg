@@ -1,0 +1,11 @@
+<!-- Placeholder for hero poster image -->
+<!-- User should replace this with a high-quality supercar image -->
+<svg width="1920" height="1080" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1920" height="1080" fill="#0a0a0a"/>
+  <text x="50%" y="50%" text-anchor="middle" fill="#4A9FF5" font-size="72" font-family="Arial">
+    HERO POSTER IMAGE
+  </text>
+  <text x="50%" y="55%" text-anchor="middle" fill="#D4AF37" font-size="24" font-family="Arial">
+    Replace with supercar image
+  </text>
+</svg>

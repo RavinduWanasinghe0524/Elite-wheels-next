@@ -1,0 +1,47 @@
+<svg width="1920" height="1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#4A9FF5" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#000000"/>
+  <rect width="1920" height="1080" fill="url(#grid)"/>
+  
+  <!-- Car outline sketch -->
+  <g stroke="#4A9FF5" stroke-width="2" fill="none" opacity="0.6">
+    <!-- Body -->
+    <ellipse cx="960" cy="540" rx="600" ry="200"/>
+    <line x1="400" y1="540" x2="1520" y2="540"/>
+    
+    <!-- Wheels -->
+    <circle cx="600" cy="700" r="80"/>
+    <circle cx="1320" cy="700" r="80"/>
+    <circle cx="600" cy="700" r="40"/>
+    <circle cx="1320" cy="700" r="40"/>
+    
+    <!-- Details -->
+    <path d="M 500 450 L 700 450 L 750 540 L 500 540 Z"/>
+    <path d="M 1420 450 L 1220 450 L 1170 540 L 1420 540 Z"/>
+  </g>
+  
+  <!-- Technical annotations -->
+  <g fill="#D4AF37" font-family="monospace" font-size="14">
+    <text x="100" y="100">TECHNICAL BLUEPRINT</text>
+    <text x="100" y="130">VEHICLE SPECIFICATIONS</text>
+    <text x="100" y="160">SCALE: 1:20</text>
+    
+    <!-- Dimension lines -->
+    <line x1="400" y1="800" x2="1520" y2="800" stroke="#D4AF37" stroke-width="1"/>
+    <text x="960" y="830" text-anchor="middle">LENGTH: 4850mm</text>
+    
+    <line x1="300" y1="340" x2="300" y2="740" stroke="#D4AF37" stroke-width="1"/>
+    <text x="250" y="540" text-anchor="end">HEIGHT: 1400mm</text>
+  </g>
+  
+  <!-- Center label -->
+  <text x="960" y="540" text-anchor="middle" fill="#4A9FF5" font-size="48" font-family="Arial" opacity="0.3">
+    BLUEPRINT
+  </text>
+</svg>

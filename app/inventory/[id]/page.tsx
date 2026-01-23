@@ -8,7 +8,6 @@ import CarGallery from '@/components/CarGallery';
 import CarSpecs from '@/components/CarSpecs';
 import ContactDealerForm from '@/components/ContactDealerForm';
 import RelatedCars from '@/components/RelatedCars';
-import ParticleBackground from '@/components/ParticleBackground';
 
 export default function CarDetailPage({ params }: { params: { id: string } }) {
   const car = cars.find(c => c.id === parseInt(params.id));
@@ -18,9 +17,7 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <main className="min-h-screen relative">
-      <ParticleBackground />
-
+    <main className="min-h-screen relative bg-charcoal">
       <div className="container mx-auto px-6 py-24 relative z-10">
         {/* Breadcrumbs */}
         <motion.nav
