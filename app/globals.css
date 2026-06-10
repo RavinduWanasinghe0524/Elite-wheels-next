@@ -31,6 +31,9 @@
   /* Gradients */
   --gradient-gold: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
   --gradient-blue-glow: radial-gradient(circle at center, var(--glow-blue-soft), transparent);
+
+  /* Luxury Easing - Heavy, smooth transitions */
+  --luxury-ease: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 * {
@@ -43,6 +46,8 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Enable inertial scrolling for iOS */
+  -webkit-overflow-scrolling: touch;
 }
 
 body {

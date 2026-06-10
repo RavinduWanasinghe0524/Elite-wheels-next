@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import MagneticButton from './MagneticButton';
@@ -13,9 +13,28 @@ export default function CinematicHero() {
   const headlineRef = useRef<HTMLDivElement>(null);
   const taglineRef = useRef<HTMLDivElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    if (!heroRef.current || !backgroundRef.current || !headlineRef.current) return;
+    const handlePreloaderComplete = () => {
+        setIsLoaded(true);
+    };
+
+    window.addEventListener('preloader-complete', handlePreloaderComplete);
+    
+    // Fallback if event was missed or not fired (e.g. dev mode refresh)
+    const timer = setTimeout(() => {
+        if (!isLoaded) setIsLoaded(true);
+    }, 2500);
+
+    return () => {
+        window.removeEventListener('preloader-complete', handlePreloaderComplete);
+        clearTimeout(timer);
+    };
+  }, []); // Run once on mount to set up listener
+
+  useEffect(() => {
+    if (!isLoaded || !heroRef.current || !backgroundRef.current || !headlineRef.current) return;
 
     const hero = heroRef.current;
     const background = backgroundRef.current;
@@ -25,74 +44,92 @@ export default function CinematicHero() {
 
     // Split headline text for staggered reveal
     const headlineText = headline.textContent || '';
-    const words = headlineText.split(' ');
-    headline.innerHTML = words
-      .map(word => `<span class="word-wrapper" style="display: inline-block; overflow: hidden; vertical-align: bottom;"><span class="word" style="display: inline-block;">${word}</span></span>`)
-      .join(' ');
+    // Prevent double splitting if already split
+    if (!headline.querySelector('.word')) {
+        const words = headlineText.split(' ');
+        headline.innerHTML = words
+        .map(word => `<span class="word-wrapper" style="display: inline-block; overflow: hidden; vertical-align: bottom;"><span class="word" style="display: inline-block;">${word}</span></span>`)
+        .join(' ');
+    }
 
     const wordElements = headline.querySelectorAll('.word');
 
-    // Initial states
+    // Initial states for Entrance
+    // Image starts zoomed in (1.2)
+    gsap.set(background, { scale: 1.2 });
     gsap.set(wordElements, { y: '100%', opacity: 0 });
     gsap.set(tagline, { opacity: 0, y: 30 });
     gsap.set(scrollIndicator, { opacity: 0 });
 
-    // Entrance animations
-    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+    // Entrance Animation Timeline (The "Launch")
+    const tl = gsap.timeline({ defaults: { ease: 'cubic-bezier(0.25, 1, 0.5, 1)' } }); // Luxury easing
 
-    tl.to(wordElements, {
+    tl
+    // 1. Image pulls back (1.2 -> 1.0) - Creates depth
+    .to(background, {
+      scale: 1.0,
+      duration: 2.0,
+      ease: 'cubic-bezier(0.25, 1, 0.5, 1)', // Custom luxury cubic-bezier
+    })
+    // 2. Text Staggers Up - Snappier 0.1s delay
+    .to(wordElements, {
       y: '0%',
       opacity: 1,
       duration: 1.2,
-      stagger: 0.15,
-      delay: 0.5,
-    })
+      stagger: 0.1, // Reduced from 0.15s for faster reveal
+      ease: 'cubic-bezier(0.25, 1, 0.5, 1)',
+    }, '-=1.5') // Start overlapping with image zoom
+    // 3. Tagline & Indicator
     .to(tagline, {
       opacity: 1,
       y: 0,
       duration: 1,
-    }, '-=0.6')
+      ease: 'cubic-bezier(0.25, 1, 0.5, 1)',
+    }, '-=0.8')
     .to(scrollIndicator, {
       opacity: 1,
       duration: 0.8,
-    }, '-=0.4');
+      ease: 'cubic-bezier(0.25, 1, 0.5, 1)',
+    }, '-=0.6');
 
-    // Scroll-based animations
-    // Background scale and blur
+
+    // Scroll-based animations (The "Drive")
+    
+    // Background: Moves slower than scroll (Parallax) and Zooms In (Drive forward)
     gsap.to(background, {
-      scale: 1.2,
-      filter: 'blur(10px)',
+      yPercent: 30, // Move down slightly as we scroll down (parallax)
+      scale: 1.1,   // Zoom in slightly (drive forward)
+      filter: 'blur(5px)', // Slight motion blur/depth
       ease: 'none',
       scrollTrigger: {
         trigger: hero,
         start: 'top top',
         end: 'bottom top',
-        scrub: 1,
+        scrub: 0, // Smooth scrubbing
       },
     });
 
-    // Headline fade and move
+    // Headline: Moves faster or fades out
     gsap.to(headline, {
+      y: -150, // Move up faster
       opacity: 0,
-      y: -100,
-      ease: 'power2.in',
+      ease: 'power1.in',
       scrollTrigger: {
         trigger: hero,
         start: 'top top',
-        end: '50% top',
-        scrub: 1,
+        end: '60% top',
+        scrub: 0.5,
       },
     });
 
-    // Tagline parallax
+     // Tagline parallax
     gsap.to(tagline, {
-      y: 200,
+      y: -50,
       opacity: 0,
-      ease: 'none',
       scrollTrigger: {
         trigger: hero,
         start: 'top top',
-        end: 'bottom top',
+        end: '40% top',
         scrub: 0.5,
       },
     });
@@ -103,7 +140,7 @@ export default function CinematicHero() {
       scrollTrigger: {
         trigger: hero,
         start: 'top top',
-        end: '20% top',
+        end: '10% top', // Fade out quickly
         scrub: true,
       },
     });
@@ -116,7 +153,7 @@ export default function CinematicHero() {
         }
       });
     };
-  }, []);
+  }, [isLoaded]);
 
   return (
     <section
@@ -132,23 +169,21 @@ export default function CinematicHero() {
         background: 'var(--charcoal)',
       }}
     >
-      {/* Background Image (Replacing Video to Fix 404 Errors) */}
+      {/* Background Image */}
       <div
         ref={backgroundRef}
         className="hero-background"
         style={{
           position: 'absolute',
-          top: '50%',
-          left: '50%',
-          minWidth: '100%',
-          minHeight: '100%',
+          top: 0,
+          left: 0,
           width: '100%',
           height: '100%',
-          transform: 'translate(-50%, -50%)',
           backgroundImage: 'url(/images/ME.webp)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           zIndex: 0,
+          willChange: 'transform', 
         }}
       />
 
@@ -157,7 +192,7 @@ export default function CinematicHero() {
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%)',
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%)',
           zIndex: 1,
         }}
       />
@@ -234,22 +269,27 @@ export default function CinematicHero() {
         }}
       >
         <div
-          style={{
-            width: '2px',
-            height: '60px',
-            background: 'linear-gradient(to bottom, transparent, var(--glow-blue), transparent)',
-            animation: 'scroll-pulse 2s ease-in-out infinite',
-          }}
-        />
+            className="flex flex-col items-center gap-2"
+        >
+            <span className="text-[10px] uppercase tracking-[0.2em] text-white/70">Start Engine</span>
+            <div
+            style={{
+                width: '1px',
+                height: '60px',
+                background: 'linear-gradient(to bottom, transparent, var(--gold), transparent)',
+                animation: 'scroll-pulse 2s ease-in-out infinite',
+            }}
+            />
+        </div>
         <style jsx>{`
           @keyframes scroll-pulse {
             0%, 100% {
               opacity: 0.3;
-              transform: translateY(0);
+              height: 40px;
             }
             50% {
               opacity: 1;
-              transform: translateY(10px);
+              height: 60px;
             }
           }
         `}</style>
