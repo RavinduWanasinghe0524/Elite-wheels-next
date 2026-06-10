@@ -1,74 +1,28 @@
 'use client';
 
-import CinematicHero from '@/components/CinematicHero';
-import FleetShowcase from '@/components/FleetShowcase';
-import HorizontalScrollSection from '@/components/HorizontalScrollSection';
-import StickyVehicleDetails from '@/components/StickyVehicleDetails';
-import AccordionFeatures from '@/components/AccordionFeatures';
-import WhyChooseUs from '@/components/WhyChooseUs';
-import Testimonials from '@/components/Testimonials';
-import CinematicFooter from '@/components/CinematicFooter';
-import PersistentCTA from '@/components/PersistentCTA';
-import { cars } from '@/lib/carData';
+import CanvasSequenceHero from '@/components/CanvasSequenceHero';
+import PremiumFeatures from '@/components/PremiumFeatures';
+import CarSpecsSection from '@/components/CarSpecsSection';
+import PremiumCTA from '@/components/PremiumCTA';
+import PremiumFooter from '@/components/PremiumFooter';
 
 export default function Home() {
-  // Get latest arrivals for horizontal scroll (first 8 cars)
-  const latestArrivals = cars.slice(0, 8).map(car => ({
-    id: car.id,
-    name: `${car.make} ${car.model}`,
-    image: car.image,
-    price: `$${car.price.toLocaleString()}`,
-    year: car.year,
-  }));
-
-  // Featured spotlight vehicle for sticky details
-  const spotlightCar = cars[0];
-  const spotlightSpecs = [
-    { label: '0-60 MPH', value: '3.2s' },
-    { label: 'Horsepower', value: '650 HP' },
-    { label: 'Engine', value: 'V8 Twin-Turbo' },
-    { label: 'Top Speed', value: '205 MPH' },
-    { label: 'Transmission', value: '8-Speed Automatic' },
-    { label: 'Drive Type', value: 'All-Wheel Drive' },
-  ];
-
   return (
-    <main className="min-h-screen overflow-hidden selection:bg-gold selection:text-black">
-      {/* Cinematic Hero with Video Background */}
-      <CinematicHero />
+    <main style={{ minHeight: '100vh', overflow: 'hidden', background: '#050508' }}>
+      {/* HERO — Canvas Scroll Sequence */}
+      <CanvasSequenceHero />
 
-      {/* Fleet Showcase with Mask Reveals */}
-      <FleetShowcase />
+      {/* FEATURES */}
+      <PremiumFeatures />
 
-      {/* Horizontal Scroll - Latest Arrivals */}
-      <HorizontalScrollSection
-        title="Latest Arrivals"
-        items={latestArrivals}
-      />
+      {/* SPECS */}
+      <CarSpecsSection />
 
-      {/* Sticky Vehicle Details - Spotlight Car */}
-      <StickyVehicleDetails
-        name={`${spotlightCar.make} ${spotlightCar.model}`}
-        tagline={spotlightCar.description}
-        image={spotlightCar.image}
-        blueprintImage="/images/blueprints/blueprint-generic.svg"
-        specs={spotlightSpecs}
-      />
+      {/* CTA */}
+      <PremiumCTA />
 
-      {/* Accordion Features */}
-      <AccordionFeatures />
-
-      {/* Why Choose Us */}
-      <WhyChooseUs />
-
-      {/* Testimonials */}
-      <Testimonials />
-
-      {/* Cinematic Footer */}
-      <CinematicFooter />
-
-      {/* Persistent CTA */}
-      <PersistentCTA />
+      {/* FOOTER */}
+      <PremiumFooter />
     </main>
   );
 }

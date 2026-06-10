@@ -1,465 +1,210 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* Light Mode Colors */
-  --cream: #F5F3EF;
-  --warm-white: #FAFAF8;
-  --light-text: #1a1a1a;
-  --light-text-muted: #6b6b6b;
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap');
 
-  /* Dark Mode Colors */
-  --charcoal: #0a0a0a;
-  --charcoal-light: #1a1a1a;
-  --charcoal-medium: #2a2a2a;
-  --dark-text: #F5F3EF;
-  --dark-text-muted: #a0a0a0;
-
-  /* Accent Colors */
-  --glow-blue: #4A9FF5;
-  --glow-blue-soft: rgba(74, 159, 245, 0.3);
-  --glow-blue-lighter: rgba(74, 159, 245, 0.1);
-
-  /* Gold (Brand Color) */
-  --gold: #D4AF37;
-  --gold-light: #E5C158;
-  --gold-dark: #B8941F;
-
-  /* Gradients */
-  --gradient-gold: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
-  --gradient-blue-glow: radial-gradient(circle at center, var(--glow-blue-soft), transparent);
-
-  /* Luxury Easing - Heavy, smooth transitions */
-  --luxury-ease: cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-* {
+/* ── Reset ─────────────────────────────────────────────────────── */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* ── Design Tokens ──────────────────────────────────────────────── */
+:root {
+  --black:         #030305;
+  --dark:          #050508;
+  --dark-mid:      #07090f;
+  --dark-light:    #0d0f18;
+
+  --gold:          #D4AF37;
+  --gold-light:    #E5C158;
+  --gold-dark:     #B8941F;
+  --gold-gradient: linear-gradient(135deg, #E5C158 0%, #D4AF37 50%, #B8941F 100%);
+
+  --blue:          #4A9FF5;
+  --blue-soft:     rgba(74, 159, 245, 0.25);
+  --blue-glow:     rgba(74, 159, 245, 0.08);
+
+  --white:         #ffffff;
+  --text-primary:  rgba(255,255,255,0.92);
+  --text-secondary:rgba(255,255,255,0.5);
+  --text-muted:    rgba(255,255,255,0.3);
+  --text-subtle:   rgba(255,255,255,0.15);
+
+  --border:        rgba(255,255,255,0.07);
+  --border-gold:   rgba(212,175,55,0.2);
+  --border-blue:   rgba(74,159,245,0.2);
+
+  --ease-luxury:   cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-smooth:   cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Base ───────────────────────────────────────────────────────── */
 html {
+  font-size: 16px;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Enable inertial scrolling for iOS */
   -webkit-overflow-scrolling: touch;
 }
 
 body {
-  background-color: var(--charcoal);
-  color: var(--dark-text);
-  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--dark);
+  color: var(--text-primary);
+  font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   overflow-x: hidden;
-  position: relative;
-
-  /* Signature blue glow border */
-  box-shadow: inset 0 0 0 2px var(--glow-blue-soft);
-
-  /* Smooth transitions for all interactions */
-  transition: background-color 0.3s ease;
+  line-height: 1.6;
 }
 
-/* Light mode body background */
-body.light-mode {
-  background-color: var(--cream);
-  color: var(--light-text);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+/* ── Typography ─────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Outfit', sans-serif;
   font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
 }
 
-/* Large-scale typography */
-h1 {
-  font-size: clamp(3rem, 10vw, 8rem);
-  font-weight: 900;
-}
+h1 { font-size: clamp(3rem, 8vw, 8rem);  font-weight: 900; }
+h2 { font-size: clamp(2rem, 5vw, 5rem);  font-weight: 900; }
+h3 { font-size: clamp(1.3rem, 3vw, 2.5rem); font-weight: 800; }
+p  { font-family: 'Outfit', sans-serif; }
 
-h2 {
-  font-size: clamp(2.5rem, 8vw, 6rem);
-  font-weight: 800;
-}
+/* ── Selection ──────────────────────────────────────────────────── */
+::selection        { background: var(--gold); color: var(--black); }
+::-moz-selection   { background: var(--gold); color: var(--black); }
 
-h3 {
-  font-size: clamp(1.5rem, 5vw, 3rem);
-  font-weight: 700;
-}
-
-/* Selection */
-::selection {
-  background-color: var(--gold);
-  color: var(--charcoal);
-}
-
-::-moz-selection {
-  background-color: var(--gold);
-  color: var(--charcoal);
-}
-
-/* Scrollbar Styles */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--charcoal-light);
-}
-
+/* ── Scrollbar ──────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: var(--black); }
 ::-webkit-scrollbar-thumb {
-  background: var(--glow-blue);
-  border-radius: 4px;
+  background: linear-gradient(to bottom, var(--blue), var(--gold));
+  border-radius: 3px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--gold);
+/* ── Utility Classes ────────────────────────────────────────────── */
+.gold-text {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-@layer components {
-
-  /* Glass effect */
-  .glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-
-  .glass-card {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  /* Light mode glass */
-  .light-mode .glass {
-    background: rgba(0, 0, 0, 0.03);
-  }
-
-  .light-mode .glass-card {
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  /* Gold gradient text */
-  .text-gradient-gold {
-    background: var(--gradient-gold);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Buttons */
-  .btn-gold {
-    background: var(--gradient-gold);
-    color: var(--charcoal);
-    font-weight: 700;
-    border-radius: 9999px;
-    padding: 0.75rem 2rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: none;
-    cursor: pointer;
-  }
-
-  .btn-gold:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
-  }
-
-  .btn-glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    color: var(--dark-text);
-    font-weight: 600;
-    border-radius: 9999px;
-    padding: 0.75rem 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-  }
-
-  .btn-glass:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--gold);
-  }
-
-  /* Section containers */
-  .section-container {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    position: relative;
-  }
-
-  /* Split screen layout */
-  .split-screen {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    min-height: 100vh;
-  }
-
-  @media (max-width: 768px) {
-    .split-screen {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-  }
-
-  /* Luxury car image container */
-  .luxury-image {
-    position: relative;
-    overflow: hidden;
-    border-radius: 1rem;
-  }
-
-  .luxury-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .luxury-image:hover img {
-    transform: scale(1.05);
-  }
-
-  /* Text reveal animation classes */
-  .text-reveal {
-    overflow: hidden;
-  }
-
-  .text-reveal-inner {
-    display: inline-block;
-    transform: translateY(100%);
-    opacity: 0;
-  }
-
-  /* Scroll indicator */
-  .scroll-indicator {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-  }
-
-  .scroll-line {
-    width: 1px;
-    height: 3rem;
-    background: linear-gradient(to bottom, var(--gold), transparent);
-    animation: scrollPulse 2s ease-in-out infinite;
-  }
-
-  @keyframes scrollPulse {
-
-    0%,
-    100% {
-      opacity: 0.3;
-      transform: scaleY(1);
-    }
-
-    50% {
-      opacity: 1;
-      transform: scaleY(1.2);
-    }
-  }
-
-  /* Persistent CTA */
-  .persistent-cta {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    animation: fadeInUp 0.6s ease-out;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translate(-50%, 20px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
-  }
-
-  /* Large background text */
-  .large-bg-text {
-    font-size: clamp(8rem, 20vw, 20rem);
-    font-weight: 900;
-    color: rgba(255, 255, 255, 0.03);
-    position: absolute;
-    z-index: 0;
-    user-select: none;
-    pointer-events: none;
-    line-height: 0.9;
-    letter-spacing: -0.05em;
-  }
-
-  .light-mode .large-bg-text {
-    color: rgba(0, 0, 0, 0.03);
-  }
-
-  /* Accordion styles */
-  .accordion-item {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-  }
-
-  .accordion-item:hover {
-    border-color: var(--glow-blue);
-  }
-
-  .accordion-header {
-    padding: 1.5rem 0;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-
-  .accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 0 0 0 1rem;
-  }
-
-  .accordion-content.open {
-    max-height: 500px;
-    padding: 0 0 1.5rem 1rem;
-  }
-
-  /* Image parallax container */
-  .parallax-container {
-    position: relative;
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  .parallax-image {
-    position: absolute;
-    top: -10%;
-    left: 0;
-    width: 100%;
-    height: 120%;
-    object-fit: cover;
-  }
-
-  /* Magnetic Button - outline variant */
-  .btn-outline {
-    background: transparent;
-    color: var(--dark-text);
-    font-weight: 600;
-    border-radius: 9999px;
-    padding: 0.75rem 2rem;
-    border: 2px solid var(--glow-blue);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    position: relative;
-  }
-
-  .btn-outline:hover {
-    background: var(--glow-blue-lighter);
-    border-color: var(--gold);
-    color: var(--gold);
-  }
-
-  .magnetic-button {
-    display: inline-block;
-    text-decoration: none;
-    position: relative;
-    will-change: transform;
-  }
-
-  /* Mask Reveal Utilities */
-  .mask-reveal-container {
-    clip-path: inset(0);
-  }
-
-  /* Blueprint overlay */
-  .blueprint-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.85);
-    mix-blend-mode: multiply;
-    transition: opacity 0.6s ease;
-  }
-
-  /* Split text classes */
-  .split-line {
-    overflow: hidden;
-    display: block;
-  }
-
-  .split-word {
-    display: inline-block;
-    will-change: transform, opacity;
-  }
-
-  .split-char {
-    display: inline-block;
-    will-change: transform, opacity;
-  }
-
-  /* Stagger text animation helper */
-  .stagger-text {
-    overflow: hidden;
-    display: inline-block;
-  }
-
-  /* Cinematic section utilities */
-  .cinematic-section {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.blue-text {
+  color: var(--blue);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.glass {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+}
 
-  .animation-delay-200 {
-    animation-delay: 200ms;
-  }
+.glass-gold {
+  background: rgba(212,175,55,0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-gold);
+}
 
-  .animation-delay-400 {
-    animation-delay: 400ms;
-  }
+.glass-blue {
+  background: rgba(74,159,245,0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-blue);
+}
 
-  .animation-delay-600 {
-    animation-delay: 600ms;
-  }
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 14px 36px;
+  background: var(--gold-gradient);
+  color: var(--black);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth);
+  box-shadow: 0 8px 30px rgba(212,175,55,0.35);
+}
+
+.btn-gold:hover {
+  transform: scale(1.04) translateY(-1px);
+  box-shadow: 0 16px 44px rgba(212,175,55,0.5);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 14px 36px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(14px);
+  color: rgba(255,255,255,0.75);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-smooth);
+}
+
+.btn-ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ── Labels ─────────────────────────────────────────────────────── */
+.overline {
+  font-size: 10px;
+  letter-spacing: 0.55em;
+  text-transform: uppercase;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+}
+
+.overline-gold { color: rgba(212,175,55,0.85); }
+.overline-blue { color: rgba(74,159,245,0.85); }
+
+/* ── Keyframes ──────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}
+
+@keyframes scrollDrop {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50%       { transform: translateY(8px); opacity: 1; }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position: 200% center; }
 }
